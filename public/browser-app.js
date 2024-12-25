@@ -4,20 +4,21 @@ const formDOM = document.querySelector(".task-form");
 const taskInputDOM = document.querySelector(".task-input");
 const formAlertDOM = document.querySelector(".form-alert");
 // Load tasks from /api/tasks
-const url = "http://localhost:8000/api/task";
+const url = "/api/task";
+// const localurl = "http://localhost:8000/api/task";
 
 // get all tasks /api/task
 const showTasks = async () => {
   loadingDOM.style.visibility = "visible"; // Show loading spinner
   try {
     // Fetch tasks using fetch
-    const response = await fetch(`${url}`);
+    const response = await fetch(`/api/task`);
     if (!response.ok) {
       throw new Error("Failed to fetch tasks");
     }
 
     const apiData = await response.json(); // Parse the JSON response
-  
+
     // Check if no tasks are available
     if (!apiData.data || apiData.data < 1) {
       tasksDOM.innerHTML = '<h5 class="empty-list">No tasks in your list</h5>';
@@ -28,7 +29,6 @@ const showTasks = async () => {
     // Map through the tasks and generate HTML
     const allTasks = apiData.data
       .map((tasks) => {
-        
         const { completed, _id: taskID, task } = tasks; // Destructure task properties
         return `<div class="single-task ${completed ? "task-completed" : ""}">
 <h5><span><i class="far fa-check-circle"></i></span>${task}</h5>

@@ -7,7 +7,8 @@ const formAlertDOM = document.querySelector(".form-alert");
 const params = window.location.search;
 const id = new URLSearchParams(params).get("id");
 let tempName;
-const url = `http://localhost:8000/api/task/${id}`;
+// const localurl = `http://localhost:8000/api/task/${id}`;
+const url = `/api/task/${id}`;
 // Function to display task details
 const showTask = async () => {
   try {
